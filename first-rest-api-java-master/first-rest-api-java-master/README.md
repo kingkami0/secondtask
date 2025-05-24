@@ -83,6 +83,5 @@ I built a full REST API using the **Layered Architecture pattern** (Controller â
 ![Database](screenshots/database.png)
 
 
-**Author:** Winifred Imade Ogbeiwi  
 **School:** Vistula University  
 **Track:** Computer Engineering  

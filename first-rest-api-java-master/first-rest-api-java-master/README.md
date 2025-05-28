@@ -1,87 +1,103 @@
-# 🔧 Spring Boot Task 2 – Building a RESTful API with Layers and Exception Handling
+# First REST API with Spring Boot
 
-I built a full REST API using the **Layered Architecture pattern** (Controller → Service → Repository), simulated a database with `HashMap`, handled exceptions, and added Swagger UI for documentation and testing.
+This project is a beginner-friendly RESTful API built with **Java** and **Spring Boot**. It demonstrates the fundamental principles of REST architecture and provides basic CRUD operations on a product catalog. The goal of this project is to help newcomers understand how to create and manage REST APIs in a clean, structured manner using Spring Boot.
 
-## 🎯 Objective
+## 📦 Features
 
-- Create a backend-only Spring Boot application (no frontend this time)
-- Structure the project using clean architectural layers
-- Use stereotypes: `@Controller`, `@RestController`, `@Service`, `@Repository`, `@Component`
-- Simulate data persistence using a `HashMap` (later replaced with a real DB)
-- Handle HTTP requests: GET, POST, PUT, DELETE
-- Add proper exception handling
-- Visualize and test API with **Swagger UI**
-- Later connect to a real H2 in-memory database
+- ✅ Create new products
+- 🔍 Retrieve single or multiple products
+- ✏️ Update existing products
+- ❌ Delete products
+- 💾 Uses H2 in-memory database
+- 🧪 Easy to test with tools like Postman or curl
 
-## ⚙️ Project Setup
+## 🛠 Technologies Used
 
-- **Created using:** IntelliJ’s built-in Spring Initializr
-- **Dependencies:**
-  - Spring Web
-  - Spring Boot DevTools
-  - H2 Database (for future use)
-  - Spring Data JPA
-  - Lombok
-  - OpenAPI (Swagger)
+- Java 17+
+- Spring Boot
+- Maven
+- H2 Database
+- Spring Web
+
+## 📁 Project Structure
+
+```
+src/
+└── main/
+    └── java/com/springstarter/first_rest_api/
+        ├── FirstRestApiApplication.java
+        └── product/
+            ├── api/
+            │   ├── ProductController.java
+            │   ├── request/
+            │   │   ├── ProductRequest.java
+            │   │   └── UpdateProductRequest.java
+            │   └── response/
+            │       └── ProductResponse.java
+            ├── domain/
+            │   └── Product.java
+            └── repository/
+                └── ProductRespository.java
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Ensure the following tools are installed:
+
+- Java 17 or higher
+- Maven
+
+### Run the Application
+
+```bash
+git clone <repository-url>
+cd first-rest-api-java-master
+./mvnw spring-boot:run
+```
+
+The server will start at `http://localhost:8080`.
+
+## 🔗 API Endpoints
+
+| Method | Endpoint           | Description             |
+|--------|--------------------|-------------------------|
+| GET    | /products          | Get all products        |
+| GET    | /products/{id}     | Get product by ID       |
+| POST   | /products          | Create a new product    |
+| PUT    | /products/{id}     | Update existing product |
+| DELETE | /products/{id}     | Delete a product        |
+
+## 🗃 Database Access (H2 Console)
+
+The application uses an H2 in-memory database. You can access the H2 console at:
+
+```
+http://localhost:8080/h2-console
+```
+
+**JDBC URL:** `jdbc:h2:mem:testdb`  
+**Username:** `sa`  
+**Password:** *(leave blank)*
+
+## 📸 Screenshots
+
+-![put](https://github.com/user-attachments/assets/c66c076a-3236-44a8-a586-620057826c3f)
+![post](https://github.com/user-attachments/assets/3ff00d43-402b-423c-9e7e-f1570a21a147)
+![get-all](https://github.com/user-attachments/assets/ada0d031-ab43-484a-908f-0388b6fd2ed1)
+![get](https://github.com/user-attachments/assets/0e995323-068c-457b-8035-d3381f26a52c)
+![delete](https://github.com/user-attachments/assets/15ce1df1-fe13-4d81-b06c-18a16029d7f3)
+![database](https://github.com/user-attachments/assets/e98f9e9f-6177-41bb-9f65-d945f9b0e177)
+
+
+
+
+
+## 📄 License
+
+This project is licensed under the MIT License. You are free to use, modify, and distribute this code as needed.
 
 ---
 
-## ✅ What I Did
-
-1. **Built a Complete REST API**
-   - Created endpoints to `create`, `read`, `update`, `delete`, and `list` products.
-   - Used path variables (`@PathVariable`) and request bodies (`@RequestBody`).
-
-2. **Implemented Clean Separation of Concerns**
-   - Created a `ProductService` for logic.
-   - Used a `ProductMapper` to convert between entities and DTOs.
-
-3. **Simulated a Database**
-   - Used a `HashMap<Long, Product>` to store data before integrating H2.
-
-4. **Handled Exceptions Properly**
-   - Created `ProductNotFoundException` and global handler with `@ControllerAdvice`.
-   - Returned clean error responses instead of 500s.
-
-5. **Documented and Tested with Swagger**
-   - Added `springdoc-openapi-ui` to `pom.xml`.
-   - Accessed interactive UI at `/swagger-ui/index.html`.
-
-6. **Connected to a Real Database**
-   - Switched to **H2 in-memory DB** with JPA and annotations like `@Entity`, `@Id`.
-
-7. **Added PUT and DELETE functionality**
-   - Enabled full CRUD operations using HTTP methods
-   - Tested with Postman, Swagger, and browser
-     
-## 🧠 What I Learned
-
-- How to build a real REST API using Spring Boot
-- Why layering (controller/service/repo) matters for maintainability
-- The power of annotations like `@RestController`, `@Service`, `@Component`
-- How to use `Optional`, `orElseThrow()`, and `Supplier` for clean null handling
-- How to handle exceptions with `@ControllerAdvice` and return user-friendly messages
-- Swagger UI integration for API testing and docs
-- Transitioning from in-memory mocks to actual databases (H2)
-
-## 📬 API Endpoints
-
-| Method | Endpoint                      | Description                          |
-|--------|-------------------------------|--------------------------------------|
-| GET    | `/api/v1/products/{id}`       | Get product by ID                    |
-| GET    | `/api/v1/products`            | Get all products                     |
-| POST   | `/api/v1/products`            | Create a new product                 |
-| PUT    | `/api/v1/products/{id}`       | Update an existing product           |
-| DELETE | `/api/v1/products/{id}`       | Delete a product by ID               |
-
-## 🖼️ Screenshots
-![Get all](screenshots/get-all.png)
-![Post](screenshots/post.png)
-![Put](screenshots/put.png)
-![Delete](screenshots/delete.png)
-![Get](screenshots/get.png)
-![Database](screenshots/database.png)
-
-
-**School:** Vistula University  
-**Track:** Computer Engineering  
+Happy Coding! 🎉
